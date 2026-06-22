@@ -1,0 +1,138 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Manik Parasara | Maritime Expert",
+  description = "Professional maritime expert portfolio of Manik Parasara — bulk carrier operations, container shipping, navigation, safety, risk assessment, sailing instruction, LNG support, and port engineering.",
+} = Astro.props;
+
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta name="theme-color" content="#0a1f33" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured data -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Manik Parasara",
+        jobTitle: "Maritime Expert",
+        address: { "@type": "PostalAddress", addressLocality: "Jakarta", addressCountry: "ID" },
+        email: "parasaranick@gmail.com",
+        alumniOf: "Semarang Merchant Marine Polytechnic",
+        knowsAbout: [
+          "Maritime Operations",
+          "Navigation",
+          "Bulk Carrier Operations",
+          "Container Shipping",
+          "LNG Support",
+          "Port Engineering",
+          "Risk Assessment",
+          "HSSE",
+        ],
+        url: "https://manikpasarana.attaf.my.id",
+      })}
+    />
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // Sticky nav state
+      const nav = document.getElementById("nav");
+      const onScroll = () => {
+        if (window.scrollY > 40) nav?.classList.add("scrolled");
+        else nav?.classList.remove("scrolled");
+      };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      // Mobile menu toggle
+      const toggle = document.getElementById("menuToggle");
+      const menu = document.getElementById("navMenu");
+      toggle?.addEventListener("click", () => menu?.classList.toggle("active"));
+      menu?.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => menu.classList.remove("active"))
+      );
+
+      // Scroll reveal
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // Contact form -> Gmail compose
+      const form = document.getElementById("contactForm") as HTMLFormElement | null;
+      form?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const val = (id: string) =>
+          (document.getElementById(id) as HTMLInputElement | null)?.value.trim() ?? "";
+        const name = val("name");
+        const email = val("email");
+        const company = val("company");
+        const projectType = val("projectType");
+        const message = val("message");
+
+        if (!name || !email || !company || !projectType || !message) {
+          alert("Please complete all fields before sending your maritime inquiry.");
+          return;
+        }
+
+        const subject = "Maritime Service Inquiry - " + projectType;
+        const body =
+          "Name: " + name + "\n" +
+          "Email: " + email + "\n" +
+          "Company / Organization: " + company + "\n" +
+          "Selected Maritime Service: " + projectType + "\n\n" +
+          "Message:\n" + message;
+
+        const gmailLink =
+          "https://mail.google.com/mail/?view=cm&fs=1" +
+          "&to=parasaranick@gmail.com" +
+          "&su=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(body);
+
+        window.open(gmailLink, "_blank");
+        form.reset();
+      });
+    </script>
+  </body>
+</html>

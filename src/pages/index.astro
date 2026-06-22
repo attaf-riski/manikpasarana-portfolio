@@ -1,0 +1,454 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
+
+import profile from "../assets/images/profile.jpg";
+import heroSea from "../assets/images/hero-sea.jpg";
+import aboutShip from "../assets/images/about-ship.jpg";
+import whySea from "../assets/images/why-sea.jpg";
+import projectsBulk from "../assets/images/projects-bulk.jpg";
+import projectsMaritime from "../assets/images/projects-maritime.jpg";
+import processNavigation from "../assets/images/process-navigation.jpg";
+import availabilityPort from "../assets/images/availability-port.jpg";
+
+const stats = [
+  { k: "Education", v: "Bachelor Degree in Marine Transportation" },
+  { k: "Singapore MPA", v: "Master License Endorsement" },
+  { k: "Hong Kong MARDEP", v: "Master License Endorsement" },
+  { k: "Shipping", v: "Bulk, Container, Tanker & LNG Support" },
+];
+
+const aboutInfo = [
+  { k: "Location", v: "Jakarta, Indonesia" },
+  { k: "Profession", v: "Maritime Expert" },
+  { k: "Education", v: "B. Marine Transportation" },
+  { k: "Alma Mater", v: "Semarang Merchant Marine Polytechnic" },
+  { k: "License", v: "Master License (Singapore MPA)" },
+  { k: "Endorsement", v: "Hong Kong MARDEP" },
+  { k: "Specialty", v: "Navigation, Safety, Shipping Ops" },
+  { k: "Languages", v: "English & Bahasa Indonesia" },
+];
+
+const whyItems = [
+  { icon: "ship", title: "Practical Seagoing Experience", text: "My maritime knowledge comes from real vessel operations, not only theory. I understand shipboard routines, operational pressure, safety requirements, and practical marine challenges." },
+  { icon: "badge", title: "Licensed Maritime Background", text: "A Bachelor Degree in Marine Transportation and Master License endorsements from Singapore MPA and Hong Kong MARDEP strengthen my professional maritime credibility." },
+  { icon: "container", title: "Shipping Industry Knowledge", text: "I understand bulk carrier, container shipping, tanker, LNG, port operations, cargo handling, voyage planning, and marine coordination requirements." },
+  { icon: "doc", title: "Clear Technical Documentation", text: "I prepare professional maritime reports, technical proposals, safety plans, operational documentation, client outreach materials, and project summaries." },
+];
+
+const services = [
+  { icon: "ship", title: "Bulk Carrier Operations Support", text: "Support for bulk cargo operations, vessel planning, loading and discharging documentation, safety considerations, operational reporting, and cargo handling procedures." },
+  { icon: "container", title: "Container Shipping Support", text: "Support for container vessel operations, shipping documentation, voyage planning, cargo coordination, port call preparation, and operational communication." },
+  { icon: "compass", title: "Navigation & Passage Planning", text: "Support for navigation planning, chartwork, voyage preparation, tidal awareness, course planning, safety margins, and practical seamanship guidance." },
+  { icon: "shield", title: "Risk Assessment & Safety", text: "Risk assessments, safety procedures, permit-to-work support, hazard identification, control measures, emergency response planning, and HSSE documentation." },
+  { icon: "sail", title: "Sailing Boat Instruction Support", text: "Beginner-friendly sailing, navigation, chartwork, seamanship, tidal calculation, and practical sailing theory support for students and recreational sailors." },
+  { icon: "anchor", title: "Port Engineering & Marine Planning", text: "Support for port planning reports, berth planning, marine terminal concepts, mooring considerations, depth and draft review, and marine infrastructure proposals." },
+];
+
+const deliverables = [
+  { icon: "shield", title: "Risk Assessment Report", text: "Structured maritime risk assessment with hazards, consequences, control measures, and practical safety recommendations." },
+  { icon: "anchor", title: "Port Planning Support Note", text: "Support for berth planning, vessel access, draft review, mooring considerations, marine safety, and terminal concept documentation." },
+  { icon: "compass", title: "Navigation & Passage Planning", text: "Practical support for passage planning, tidal awareness, course planning, safety margins, pilotage, and chartwork explanation." },
+  { icon: "doc", title: "Maritime Technical Report", text: "Clear technical reports for vessel operations, shipping projects, maritime business support, safety planning, and operational review." },
+  { icon: "chart", title: "LNG / Shipping Market Research", text: "Research support for LNG, shipping, maritime suppliers, vendor registration, client targeting, and business development preparation." },
+  { icon: "layers", title: "HSSE Documentation", text: "Support for safety procedures, emergency planning, permit-to-work documents, hazard identification, and HSSE-related project documentation." },
+];
+
+const experience = [
+  { title: "Master License Endorsements", company: "Singapore MPA & Hong Kong MARDEP", text: "Holds Master License endorsements from the Maritime and Port Authority of Singapore and Hong Kong Marine Department, supported by practical experience in navigation, bridge procedures, cargo operations, shipboard safety, emergency preparedness, marine documentation, and international vessel operations." },
+  { title: "Shipping & Marine Operations Support", company: "Bulk Carrier, Container, Tanker & LNG Projects", text: "Experience supporting maritime and shipping-related documentation, operational coordination, market research, technical communication, client outreach, and marine business support." },
+  { title: "Safety, Risk & Technical Documentation", company: "Maritime, Offshore, LNG & Port Projects", text: "Preparation of structured reports, risk assessments, HSSE plans, technical proposals, safety-related documents, and professional maritime project documentation." },
+];
+
+const projects = [
+  { img: projectsBulk, tag: "Port Planning", title: "Bulk Carrier Port Planning Proposal", text: "Prepared technical planning content for a bulk carrier terminal concept, including draft considerations, berth planning, offshore distance, vessel size, marine safety, and HSSE planning." },
+  { img: projectsMaritime, tag: "LNG / Business Dev", title: "LNG Market & Technical Support", text: "Supported LNG and cryogenic pump business development through market research, client targeting, vendor registration preparation, technical documentation, and professional outreach." },
+  { img: processNavigation, tag: "Navigation", title: "Navigation & Sailing Chartwork Support", text: "Supported sailing and navigation learning, including tidal calculations, course to steer, estimated position, chart plotting, pilotage planning, and practical seamanship explanation." },
+];
+
+const competencies = [
+  { icon: "badge", title: "Maritime Education", text: "Graduated from Semarang Merchant Marine Polytechnic with a Bachelor Degree in Marine Transportation — a strong academic foundation in navigation, seamanship, vessel operations, and maritime safety." },
+  { icon: "compass", title: "Navigation & Seamanship", text: "Passage planning, chartwork, watchkeeping, tidal awareness, navigational safety, pilotage, collision avoidance, and practical bridge operations." },
+  { icon: "shield", title: "Safety & Risk Management", text: "Risk assessment, HSSE planning, permit-to-work awareness, emergency response, safety management systems, hazard control, and operational compliance." },
+  { icon: "ship", title: "Shipping Operations", text: "Bulk carrier operations, container shipping, tanker operations, LNG-related support, port operations, marine documentation, and cargo handling awareness." },
+  { icon: "anchor", title: "Port & Marine Infrastructure", text: "Port planning concepts, berth and draft review, marine terminal documentation, safety planning, vessel access considerations, and offshore terminal support." },
+];
+
+const process = [
+  { title: "Understand Requirement", text: "I review the project requirement, vessel type, operational issue, safety concern, or maritime documentation objective." },
+  { title: "Review Maritime Information", text: "I study the available technical data, operational background, safety requirements, port condition, vessel details, or client documents." },
+  { title: "Prepare Professional Output", text: "I prepare structured reports, risk assessments, technical summaries, operational plans, maritime research, or professional documentation." },
+  { title: "Deliver Clear Support", text: "I deliver clear, practical, professional maritime support ready for decision-making, client communication, project planning, or documentation." },
+];
+
+const availability = [
+  { icon: "remote", title: "Remote Maritime Support", text: "Available to support maritime, shipping, LNG, port, safety, and technical documentation projects remotely." },
+  { icon: "pin", title: "Jakarta Based", text: "Based in Jakarta, Indonesia, with strong understanding of the Indonesian maritime, port, LNG, and oil & gas business environment." },
+  { icon: "language", title: "English & Bahasa Indonesia", text: "Able to communicate professionally in English and Bahasa Indonesia for international and local maritime clients." },
+  { icon: "handshake", title: "Project-Based Support", text: "Open for consulting support, technical report preparation, safety documentation, maritime research, and business development assistance." },
+];
+
+const faqs = [
+  { q: "Do you support remote maritime projects?", a: "Yes. I can support maritime documentation, shipping research, risk assessment, safety planning, navigation explanation, and technical report preparation remotely." },
+  { q: "What vessel types can you support?", a: "I can support projects related to bulk carriers, container vessels, tankers, LNG operations, port operations, and general marine transportation activities." },
+  { q: "Can you prepare safety and risk documents?", a: "Yes. I can help prepare risk assessments, HSSE documentation, safety procedures, hazard identification summaries, permit-to-work support documents, and emergency planning materials." },
+  { q: "Can you support port engineering reports?", a: "Yes. I can support port planning reports, berth planning concepts, depth and draft review, vessel access considerations, marine safety planning, and terminal proposal documentation." },
+  { q: "Can you help with sailing and navigation learning?", a: "Yes. I can support beginner-friendly navigation, chartwork, tidal calculation, course to steer, passage planning, and seamanship explanation." },
+  { q: "How can clients contact you?", a: "Clients can use the contact form, Gmail link, email link, or WhatsApp link on this website. The form prepares a professional maritime inquiry email automatically." },
+];
+
+const serviceOptions = [
+  "Bulk Carrier Consultancy", "Container Shipping Support", "Tanker Operations Support",
+  "LNG Operations Support", "Port Engineering Support", "Navigation & Passage Planning",
+  "Risk Assessment & Safety", "HSSE Documentation", "Sailing Boat Instruction",
+  "Maritime Technical Report", "Other Maritime Project",
+];
+---
+
+<Base>
+  <Nav />
+
+  <!-- Hero -->
+  <header id="home" class="hero">
+    <div class="hero-bg">
+      <Image src={heroSea} alt="Cargo ship at sea" widths={[768, 1280, 1920]} sizes="100vw" loading="eager" fetchpriority="high" />
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="hero-eyebrow"><Icon name="anchor" /> Maritime Expert · Jakarta, Indonesia</span>
+          <h1>Maritime Operations, Navigation, Safety &amp; <span class="hl">Port Engineering Support</span></h1>
+          <p class="hero-description">
+            I support maritime, shipping, offshore, LNG, port, and safety-related projects
+            with practical seagoing experience, vessel operations knowledge, formal maritime
+            education, and professional documentation skills.
+          </p>
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary"><Icon name="mail" /> Contact Me</a>
+            <a href="#services" class="btn btn-ghost">View Services</a>
+          </div>
+          <div class="hero-social">
+            <a href="https://www.linkedin.com/in/your-linkedin-profile" target="_blank" rel="noopener"><Icon name="linkedin" /> LinkedIn</a>
+            <a href="mailto:parasaranick@gmail.com"><Icon name="mail" /> Email</a>
+            <a href="https://wa.me/6281383349230" target="_blank" rel="noopener"><Icon name="whatsapp" /> WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="hero-portrait">
+          <div class="frame">
+            <Image src={profile} alt="Portrait of Manik Parasara" width={400} height={500} loading="eager" />
+          </div>
+          <span class="badge"><span class="dot"></span> Available for projects</span>
+        </div>
+
+        <div class="hero-stats">
+          {stats.map((s) => (
+            <div class="stat-box">
+              <h3>{s.k}</h3>
+              <p>{s.v}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-figure reveal">
+          <Image src={aboutShip} alt="Vessel operating at sea" widths={[480, 760]} sizes="(max-width: 980px) 100vw, 50vw" />
+          <div class="exp-chip">
+            <strong>2</strong>
+            <span>Master License endorsements — Singapore MPA &amp; Hong Kong MARDEP</span>
+          </div>
+        </div>
+        <div class="about-text reveal">
+          <div class="section-head" style="margin-bottom:1.4rem;">
+            <span class="eyebrow">About Me</span>
+            <h2>Maritime professional grounded in real seagoing practice</h2>
+          </div>
+          <p>
+            I am a maritime expert based in Jakarta, Indonesia. I graduated from Semarang
+            Merchant Marine Polytechnic with a Bachelor Degree in Marine Transportation and
+            hold Master License endorsements from the Maritime and Port Authority of Singapore
+            (MPA) and Hong Kong Marine Department (MARDEP).
+          </p>
+          <p>
+            My background includes international vessel operations, navigation, bridge
+            watchkeeping, safety management, cargo operations, maritime compliance, and
+            technical documentation across shipping and marine-related projects.
+          </p>
+          <p>
+            I help companies, consultants, vessel operators, port developers, offshore
+            projects, and maritime businesses prepare clear technical documents, operational
+            reports, safety plans, and maritime project proposals.
+          </p>
+          <div class="about-info">
+            {aboutInfo.map((i) => (
+              <div>
+                <span class="k">{i.k}</span>
+                <span class="v">{i.v}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Me -->
+  <section id="why-me" class="why">
+    <div class="why-bg">
+      <Image src={whySea} alt="" widths={[1280, 1920]} sizes="100vw" />
+    </div>
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Why Work With Me</span>
+        <h2>Practical experience backed by formal credentials</h2>
+        <p>Real vessel operations, licensed maritime background, broad shipping knowledge, and clear professional documentation.</p>
+      </div>
+      <div class="grid grid-2 reveal">
+        {whyItems.map((w) => (
+          <div class="why-card">
+            <div class="ico"><Icon name={w.icon} /></div>
+            <h3>{w.title}</h3>
+            <p>{w.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="bg-surface">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Services</span>
+        <h2>Professional maritime services</h2>
+        <p>End-to-end support across operations, navigation, safety, and port engineering.</p>
+      </div>
+      <div class="grid grid-3 reveal">
+        {services.map((s) => (
+          <div class="card accent-top">
+            <div class="ico"><Icon name={s.icon} /></div>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Deliverables -->
+  <section id="deliverables" class="bg-alt">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Deliverables</span>
+        <h2>Professional deliverables you can use</h2>
+        <p>Structured, decision-ready documents prepared to a professional standard.</p>
+      </div>
+      <div class="grid grid-3 reveal">
+        {deliverables.map((d) => (
+          <div class="card">
+            <div class="ico"><Icon name={d.icon} /></div>
+            <h3>{d.title}</h3>
+            <p>{d.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="bg-surface">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Experience</span>
+        <h2>Professional experience</h2>
+      </div>
+      <div class="timeline reveal">
+        {experience.map((e) => (
+          <div class="timeline-item">
+            <h3>{e.title}</h3>
+            <p class="timeline-company">{e.company}</p>
+            <p>{e.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="bg-alt">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Projects</span>
+        <h2>Selected maritime projects</h2>
+      </div>
+      <div class="grid grid-3 reveal">
+        {projects.map((p) => (
+          <article class="project-card">
+            <div class="project-media">
+              <Image src={p.img} alt={p.title} widths={[400, 760]} sizes="(max-width: 980px) 100vw, 33vw" />
+              <span class="project-tag">{p.tag}</span>
+            </div>
+            <div class="project-body">
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Competencies -->
+  <section id="certifications" class="bg-surface">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Competencies</span>
+        <h2>Core competencies</h2>
+      </div>
+      <div class="grid grid-3 reveal">
+        {competencies.map((c) => (
+          <div class="card accent-top">
+            <div class="ico"><Icon name={c.icon} /></div>
+            <h3>{c.title}</h3>
+            <p>{c.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process" class="process">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">How I Work</span>
+        <h2>A clear, structured process</h2>
+      </div>
+      <div class="process-grid reveal">
+        {process.map((p, i) => (
+          <div class="process-step">
+            <div class="num">{i + 1}</div>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Availability -->
+  <section id="availability" class="availability">
+    <div class="av-bg">
+      <Image src={availabilityPort} alt="" widths={[1280, 1920]} sizes="100vw" />
+    </div>
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Availability</span>
+        <h2>Availability &amp; collaboration</h2>
+        <p>Flexible, project-based maritime support for international and local clients.</p>
+      </div>
+      <div class="grid grid-2 reveal">
+        {availability.map((a) => (
+          <div class="av-card">
+            <h3><span class="ico"><Icon name={a.icon} /></span> {a.title}</h3>
+            <p>{a.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq-list reveal">
+        {faqs.map((f) => (
+          <details class="faq-item">
+            <summary>{f.q} <Icon name="chevron" class="chev" /></summary>
+            <div class="faq-answer">{f.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <div class="section-head" style="margin-bottom:1.4rem;">
+            <span class="eyebrow">Contact</span>
+            <h2>Let's discuss your maritime project</h2>
+            <p>Send an inquiry and I'll respond with practical next steps.</p>
+          </div>
+          <a class="channel" href="mailto:parasaranick@gmail.com">
+            <span class="ico"><Icon name="mail" /></span>
+            <span><span class="k">Email</span><br /><span class="v">parasaranick@gmail.com</span></span>
+          </a>
+          <a class="channel" href="https://wa.me/6281383349230" target="_blank" rel="noopener">
+            <span class="ico"><Icon name="whatsapp" /></span>
+            <span><span class="k">WhatsApp</span><br /><span class="v">+62 813-8334-9230</span></span>
+          </a>
+          <div class="channel">
+            <span class="ico"><Icon name="pin" /></span>
+            <span><span class="k">Location</span><br /><span class="v">Jakarta, Indonesia</span></span>
+          </div>
+        </div>
+
+        <div class="contact-card reveal">
+          <form class="contact-form" id="contactForm">
+            <div class="form-row">
+              <div>
+                <label for="name">Your Name</label>
+                <input type="text" id="name" placeholder="Full name" />
+              </div>
+              <div>
+                <label for="email">Your Email</label>
+                <input type="email" id="email" placeholder="you@email.com" />
+              </div>
+            </div>
+            <div>
+              <label for="company">Company / Organization</label>
+              <input type="text" id="company" placeholder="Company or organization" />
+            </div>
+            <div>
+              <label for="projectType">Service / Inquiry Type</label>
+              <select id="projectType">
+                <option value="">Select a maritime service…</option>
+                {serviceOptions.map((o) => <option value={o}>{o}</option>)}
+              </select>
+            </div>
+            <div>
+              <label for="message">Message</label>
+              <textarea id="message" placeholder="Briefly describe your project or inquiry"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary"><Icon name="mail" /> Send Email Inquiry</button>
+            <p class="form-note">Opens a pre-filled email in Gmail — no data is stored on this site.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <a href="https://wa.me/6281383349230" class="floating-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <Icon name="whatsapp" /> WhatsApp
+  </a>
+</Base>

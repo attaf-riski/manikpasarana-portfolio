@@ -1,0 +1,28 @@
+---
+const links = [
+  { href: "#about", label: "About" },
+  { href: "#why-me", label: "Why Me" },
+  { href: "#services", label: "Services" },
+  { href: "#experience", label: "Experience" },
+  { href: "#projects", label: "Projects" },
+  { href: "#certifications", label: "Competencies" },
+  { href: "#faq", label: "FAQ" },
+];
+---
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#home" class="brand">
+      <span class="brand-mark">MP</span>
+      Manik Parasara
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+
+    <ul class="nav-menu" id="navMenu">
+      {links.map((l) => (
+        <li><a href={l.href}>{l.label}</a></li>
+      ))}
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>
