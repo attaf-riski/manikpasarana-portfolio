@@ -7,7 +7,7 @@ safety, risk assessment, sailing instruction, LNG support, and port engineering.
 Built with [Astro](https://astro.build) — a fast, static-first site with build-time
 image optimization (WebP, responsive `srcset`).
 
-🌐 **Live:** https://manikpasarana.attaf.my.id
+🌐 **Live:** https://manikparasara.attaf.my.id
 
 ## Tech stack
 
