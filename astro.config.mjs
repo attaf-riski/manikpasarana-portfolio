@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://manikparasara.attaf.my.id',
+  site: 'https://manikparasara-edited.attaf.my.id',
   build: {
     inlineStylesheets: 'auto',
   },
